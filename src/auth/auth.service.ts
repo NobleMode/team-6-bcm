@@ -28,15 +28,14 @@ export class AuthService {
   }
 
   async login(req: Request, loginUserDto: LogInUserDto): Promise<any> {
-    const user = req.session.user;
     const { email, password } = loginUserDto;
     const foundUser = await this.userRepository.findOneBy({
       email,
     });
-    if (!user) {
+    if (!foundUser) {
       throw new HttpException('Email is not exist', HttpStatus.NOT_FOUND);
     }
-    const checkPass = bcrypt.compareSync(password, user.password);
+    const checkPass = bcrypt.compareSync(password, foundUser.password);
     if (!checkPass) {
       throw new HttpException(
         'Password is not correct',
@@ -45,11 +44,11 @@ export class AuthService {
     }
 
     //generate access token and refresh token
-    const payload = { id: user.id, email: user.email };
+    const payload = { id: foundUser.id, email: foundUser.email };
     return this.generateToken;
   }
   async validateUser(username, pass): Promise<any> {
-    const user = await this.user.findOne(username);
+    const user = await this.userRepository.findOne(username);
     if (user && user.password === pass) {
       const { password, ...result } = user;
       return result;
