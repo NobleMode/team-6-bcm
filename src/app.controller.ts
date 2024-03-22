@@ -1,34 +1,40 @@
-import {
-  Request,
-  Controller,
-  Get,
-  Post,
-  Res,
-  UseGuards,
-  Render,
-} from '@nestjs/common';
-import { AppService } from './app.service';
+import { Controller, Get, Post, Request, Res, Render, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
-import { AuthGuard } from '@nestjs/passport';
-import { LocalAuthGuard } from './auth/local-auth.guard';
+
+import { LoginGuard } from './common/guards/login.guard';
+import { AuthenticatedGuard } from './common/guards/authenticated.guard';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
-
-  @Get()
+  @Get('/')
   @Render('login')
-  root() {
-    return {
-      test: [
-        { name: 'a', age: 10 },
-        { name: 'bn', age: 20 },
-      ],
-    };
+  index() {
+    return;
   }
-  @UseGuards(LocalAuthGuard)
-  @Post('auth/login')
-  async login(@Request() req) {
-    return req.user;
+
+  @UseGuards(LoginGuard)
+  @Post('/login')
+  login(@Res() res: Response) {
+    res.redirect('/home');
+  }
+
+  @UseGuards(AuthenticatedGuard)
+  @Get('/home')
+  @Render('home')
+  getHome(@Request() req) {
+    return { user: req.user };
+  }
+
+  @UseGuards(AuthenticatedGuard)
+  @Get('/profile')
+  @Render('profile')
+  getProfile(@Request() req) {
+    return { user: req.user };
+  }
+
+  @Get('/logout')
+  logout(@Request() req, @Res() res: Response) {
+    req.logout();
+    res.redirect('/');
   }
 }
