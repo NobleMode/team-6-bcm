@@ -1,17 +1,19 @@
-import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete, UseGuards, Render } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { MemberService } from './member.service';
 import { MemberEntity } from 'src/entities/member.entity';
+import { AuthenticatedGuard } from 'src/common/guards/authenticated.guard';
 
 @Controller('members')
 export class MemberController {
   constructor(
     @InjectRepository(MemberEntity)
     private readonly memberService: MemberService) {}
-
+  @UseGuards(AuthenticatedGuard)  
   @Get()
-  async findAll(): Promise<MemberEntity[]> {
+  @Render('info')
+   findAll(): Promise<MemberEntity[]> {
     return this.memberService.findAll();
   }
 

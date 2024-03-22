@@ -33,7 +33,7 @@ export class AuthController {
 
   @UseGuards(AuthGuard('local'))
   @Post('signin') // Changed to POST
-  signin(@Req() req: Request) {
+  signin(@Req() req: Request & { user: any }) {
     const user = req.user;
     console.log('user', user);
     return 'sign in successfully!';
