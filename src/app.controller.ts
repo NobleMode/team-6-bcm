@@ -43,9 +43,45 @@ export class AppController {
     return { user: req.user };
   }
 
+  @UseGuards(AuthenticatedGuard)
   @Get('/logout')
   logout(@Request() req, @Res() res: Response) {
     req.logout();
     res.redirect('/');
+  }
+
+  @UseGuards(AuthenticatedGuard)
+  @Get('/active')
+  @Render('active')
+  getActive(@Request() req) {
+    return { user: req.user };
+  }
+
+  @UseGuards(AuthenticatedGuard)
+  @Get('/task')
+  @Render('task')
+  getTask(@Request() req) {
+    return { user: req.user };
+  }
+
+  @UseGuards(AuthenticatedGuard)
+  @Get('/home_task')
+  @Render('home_task')
+  getHomeTask(@Request() req) {
+    return { user: req.user };
+  }
+
+  @UseGuards(AuthenticatedGuard)
+  @Get('/index')
+  @Render('index')
+  getIndex(@Request() req) {
+    return { user: req.user };
+  }
+
+  @UseGuards(AuthenticatedGuard)
+  @Get('/infor')
+  @Render('infor')
+  getInfor(@Request() req) {
+    return { user: req.user };
   }
 }
