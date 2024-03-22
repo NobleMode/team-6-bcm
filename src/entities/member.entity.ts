@@ -8,7 +8,7 @@ import { ProjStat } from './projStat.entity';
 import { User } from './user.entity';
 
 @Entity()
-export class Member {
+export class MemberEntity {
     @PrimaryGeneratedColumn()
     id: number;
 

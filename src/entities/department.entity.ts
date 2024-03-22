@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { Member } from './member.entity';
+import { MemberEntity } from './member.entity';
 import { Work } from './work.entity';
 
 @Entity()
@@ -16,7 +16,7 @@ export class Department {
     @Column()
     description: string;
 
-    @OneToMany(() => Member, (mem) => mem.department)
+    @OneToMany(() => MemberEntity, (mem) => mem.department)
     memberDep: string[];
 
     @OneToMany(() => Work, (work) => work.dept)
