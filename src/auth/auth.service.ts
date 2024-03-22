@@ -33,10 +33,10 @@ export class AuthService {
     const foundUser = await this.userRepository.findOneBy({
       email,
     });
-    if (!user) {
+    if (!foundUser) {
       throw new HttpException('Email is not exist', HttpStatus.NOT_FOUND);
     }
-    const checkPass = bcrypt.compareSync(password, user.password);
+    const checkPass = bcrypt.compareSync(password, foundUser.password);
     if (!checkPass) {
       throw new HttpException(
         'Password is not correct',

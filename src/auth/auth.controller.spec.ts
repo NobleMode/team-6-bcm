@@ -1,22 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppController } from 'src/app.controller';
-import { AppService } from 'src/app.service';
+import { AuthController } from './auth.controller';
 
-describe('AppController', () => {
-  let appController: AppController;
+describe('AuthController', () => {
+  let controller: AuthController;
 
   beforeEach(async () => {
-    const app: TestingModule = await Test.createTestingModule({
-      controllers: [AppController],
-      providers: [AppService],
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [AuthController],
     }).compile();
 
-    appController = app.get<AppController>(AppController);
+    controller = module.get<AuthController>(AuthController);
   });
 
-  describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
-    });
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
   });
 });
