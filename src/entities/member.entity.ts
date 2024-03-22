@@ -57,7 +57,7 @@ export class Member {
     @OneToMany(() => ProjStat, (ps) => ps.head)
     psHead: string[];
 
-    @OneToOne(() => User, (u) => u.mail)
+    @OneToOne(() => User, (u) => u.email)
     usermail: string[];
 
     @OneToOne(() => User, (u) => u.user)
