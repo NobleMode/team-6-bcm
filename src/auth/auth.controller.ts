@@ -1,6 +1,15 @@
-import { Body, Controller, Post, Req, Res, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Req,
+  Res,
+  UseGuards,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { Request } from 'express';
+import { Request, Response } from 'express'; // Import Response
 import { AuthGuard } from '@nestjs/passport';
 import { RegisterUserDto } from 'src/dto/register-user.dto';
 import { User } from 'src/entities/user.entity';
@@ -12,27 +21,37 @@ export class AuthController {
 
   @Post('login')
   @UsePipes(ValidationPipe)
-  login(@Body() loginUserDto:LogInUserDto, @Res() res:Response):Promise<any> {
+  login(
+    @Req() req: Request,
+    @Body() loginUserDto: LogInUserDto,
+    @Res() res: Response,
+  ): Promise<any> {
     console.log('login api');
     console.log(loginUserDto);
-    return this.authService.login(loginUserDto);
+    return this.authService.login(req, loginUserDto);
   }
+
   @UseGuards(AuthGuard('local'))
-  signin(@Req() req:Request) {
-    const user=req.user;
+  @Post('signin') // Changed to POST
+  signin(@Req() req: Request) {
+    const user = req.user;
     console.log('user', user);
     return 'sign in successfully!';
   }
 
   @Post('register')
-  register(@Body() registerUserDto:RegisterUserDto, @Res() res:Response):Promise<User> {
+  register(
+    @Body() registerUserDto: RegisterUserDto,
+    @Res() res: Response,
+  ): Promise<User> {
     console.log('register api');
-    console.log(registerUserDto)
+    console.log(registerUserDto);
     return this.authService.register(registerUserDto);
   }
+
   @Post('refresh_token')
-  refreshToken(@Body() {refresh_token}):Promise<any>{
-    console.log('refresh token api')
+  refreshToken(@Body() { refresh_token }): Promise<any> {
+    console.log('refresh token api');
     return this.authService.refreshToken(refresh_token);
   }
 }
