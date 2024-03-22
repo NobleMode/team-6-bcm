@@ -35,6 +35,9 @@ export class AuthService {
         if(!checkPass){
             throw new HttpException('Password is not correct', HttpStatus.UNAUTHORIZED)
         }
+        else{
+            res.sendDirect("home.hbs");
+        }
         //generate access token and refresh token
         const payload = {id:user.id, email:user.email};
         return this.generateToken
