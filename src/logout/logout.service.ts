@@ -3,7 +3,7 @@ import { PassportSerializer } from '@nestjs/passport';
 import { Session } from 'express-session';
 import { PassportStatic } from 'passport';
 @Injectable()
-export class AuthService implements PassportSerializer {
+export class LogoutService implements PassportSerializer {
   getPassportInstance(): PassportStatic {
     throw new Error('Method not implemented.');
   }

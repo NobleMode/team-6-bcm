@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { AuthService } from './logout.service';
-import { AuthController } from './logout.controller';
+import { LogoutService } from './logout.service';
+import { LogoutController } from './logout.controller';
 import { PassportModule } from '@nestjs/passport';
 import { SessionSerializer } from 'src/auth/session.serializer'; 
 import { SessionModule } from 'nestjs-session';
@@ -12,7 +12,7 @@ import { SessionModule } from 'nestjs-session';
             session: { secret: 'your-secret-key' },
         }),
     ],
-    providers: [AuthService, SessionSerializer], 
-    controllers: [AuthController], 
+    providers: [LogoutService, SessionSerializer], 
+    controllers: [LogoutController], 
 })
-export class AuthModule { }
+export class LogoutModule { }

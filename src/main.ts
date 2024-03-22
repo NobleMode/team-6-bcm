@@ -1,4 +1,4 @@
-import { NestFactory } from '@nestjs/core';
+import { NestFactory, PartialGraphHost } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { json, urlencoded } from 'express';
@@ -7,9 +7,13 @@ import { join } from 'path';
 import { resolve } from 'path';
 import { ConfigService } from '@nestjs/config';
 import * as session from 'express-session';
+import * as fs from 'fs';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    snapshot: true,
+    abortOnError: false, // <--- THIS
+  });
   // const configService = app.get(ConfigService);
   // const clientUrls = configService.get('CLIENT_URLS').split(',');
 
@@ -42,4 +46,8 @@ async function bootstrap() {
 
   await app.listen(3000);
 }
-bootstrap();
+
+bootstrap().catch((err) => {
+  fs.writeFileSync('graph.json', PartialGraphHost.toString() ?? '');
+  process.exit(1);
+});
