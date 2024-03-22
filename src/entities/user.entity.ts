@@ -1,15 +1,15 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne, OneToMany, CreateDateColumn } from 'typeorm';
-import { Member } from './member.entity';
+import { MemberEntity } from './member.entity';
 
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @OneToOne(() => Member, (mem) => mem.rollno)
+    @OneToOne(() => MemberEntity, (mem) => mem.rollno)
     user: string;
 
-    @OneToOne(() => Member, (mem) => mem.email)
+    @OneToOne(() => MemberEntity, (mem) => mem.email)
     email: string;
 
     @Column()

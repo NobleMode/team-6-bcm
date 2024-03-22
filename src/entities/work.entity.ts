@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { Department } from './department.entity';
 import { Status } from './status.entity';
-import { Member } from './member.entity';
+import { MemberEntity } from './member.entity';
 import { Priority } from './priority.entity';
 import { WorkStatus } from './workStatus.entity';
 
@@ -16,7 +16,7 @@ export class Work {
     @ManyToOne(() => WorkStatus, (stat) => stat.level)
     status: number;
 
-    @ManyToOne(() => Member, (mem) => mem.rollno)
+    @ManyToOne(() => MemberEntity, (mem) => mem.rollno)
     head: string;
 
     @Column()
