@@ -8,7 +8,7 @@ import { ProjStat } from './projStat.entity';
 import { User } from './user.entity';
 
 @Entity()
-export class Member {
+export class MemberEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -57,7 +57,7 @@ export class Member {
     @OneToMany(() => ProjStat, (ps) => ps.head)
     psHead: string[];
 
-    @OneToOne(() => User, (u) => u.mail)
+    @OneToOne(() => User, (u) => u.email)
     usermail: string[];
 
     @OneToOne(() => User, (u) => u.user)
