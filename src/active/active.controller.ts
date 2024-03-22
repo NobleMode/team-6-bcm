@@ -1,4 +1,4 @@
-import { Controller,Get,UseGuards } from '@nestjs/common';
+import { Controller,Get,Render,UseGuards } from '@nestjs/common';
 import { UserService } from './active.service';
 import { EventActive } from 'src/entities/eventActive.entity';
 import { AuthGuard } from 'src/auth/auth.guard';
@@ -8,6 +8,9 @@ export class UserController {
     
     @UseGuards(AuthGuard)
     @Get()
-    findAll():Promise<EventActive[]> {
-        return this.userService.findAll();
+    @Render('active/active')
+    root() {
+        return this.userService
+                    .findAll()
+                    .then((result) => result ? {active: result} : {active: []} );
     }}
