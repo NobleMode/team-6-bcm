@@ -1,12 +1,18 @@
 import { Module } from '@nestjs/common';
-import { AuthController } from './logout.controller';
 import { AuthService } from './logout.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { EventActive } from 'src/entities/eventActive.entity';
-import { ConfigModule } from '@nestjs/config';
+import { AuthController } from './logout.controller';
+import { PassportModule } from '@nestjs/passport';
+import { SessionSerializer } from './session.serializer'; 
+import { SessionModule } from 'nestjs-session';
+
 @Module({
-  imports: [ConfigModule],
-  controllers: [AuthController],
-  providers: [AuthService]
+    imports: [
+        PassportModule,
+        SessionModule.forRoot({
+            session: { secret: 'your-secret-key' },
+        }),
+    ],
+    providers: [AuthService, SessionSerializer], 
+    controllers: [AuthController], 
 })
-export class UserModule {}
+export class AuthModule { }
