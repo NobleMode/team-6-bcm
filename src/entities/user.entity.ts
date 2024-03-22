@@ -10,7 +10,7 @@ export class User {
     user: string;
 
     @OneToOne(() => Member, (mem) => mem.email)
-    mail: string;
+    email: string;
 
     @Column()
     username: string;
