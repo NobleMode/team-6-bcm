@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, Res } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RegisterUserDto } from 'src/dto/register-user.dto';
 import { User } from 'src/entities/user.entity';
@@ -7,6 +7,7 @@ import * as bcrypt from 'bcrypt';
 import { LogInUserDto } from 'src/dto/login-user.dto';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { Response } from 'express';
 
 @Injectable()
 export class AuthService {
@@ -22,7 +23,7 @@ export class AuthService {
         return await this.userRepository.save({...registerUserDto,refresh_token:"refresh_token_string", password:hashPassword});
     }
 
-    async login(loginUserDto:LogInUserDto):Promise<any> {
+    async login(@Res() res: Response,loginUserDto:LogInUserDto):Promise<any> {
         const user = await this.userRepository.findOne(
             {
                 where:{email:loginUserDto.email}
