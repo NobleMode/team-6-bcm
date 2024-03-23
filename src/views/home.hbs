@@ -179,6 +179,43 @@ body {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ad0214' d='M16.59 8.59L12 13.17L7.41 8.59L6 10l6 6l6-6z'/%3E%3C/svg%3E");
   }
 
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: Verdana, sans-serif;
+}
+.slider{
+    width: 1000px;
+    height: 600px;
+}
+img {
+    border-radius: 20px;
+}
+.container{
+    margin: 50px;
+}
+
+/* Slideshow container */
+.slideshow-container {
+    max-width: 1000px;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active {
+    background-color: #717171;
+}
+
   
   </style>
   <body>
@@ -221,7 +258,7 @@ body {
     <div class="menu-bar">
       <div class="tab-buttons grid-cols-12">
         <a
-          href="homePage.html"
+          href="/home"
           class="btn menu-button col-span-3 text-white bg-[#ad0214]"
         >
         <button aria-label="Trang chủ">
