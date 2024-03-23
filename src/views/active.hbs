@@ -56,6 +56,46 @@
         profile.style.display = "none";
       }
     }
+
+    window.onload = function() {
+      document.querySelectorAll('.dropdown-item-1').forEach(item => {
+        item.addEventListener('click', event => {
+          event.preventDefault();
+          const dropdownButton = document.getElementById('dropdownButton-1');
+          dropdownButton.innerHTML = event.target.innerHTML;
+
+          const fake1Elements = document.getElementsByClassName('fake-1');
+          const fake2Elements = document.getElementsByClassName('fake-2');
+
+          if (dropdownButton.innerHTML == "Kì") {
+            for (let i = 0; i < fake1Elements.length; i++) {
+              fake1Elements[i].style.display = "none";
+            }
+            for (let i = 0; i < fake2Elements.length; i++) {
+              fake2Elements[i].style.display = "block";
+            }
+          } else {
+            for (let i = 0; i < fake1Elements.length; i++) {
+              fake1Elements[i].style.display = "block";
+            }
+            for (let i = 0; i < fake2Elements.length; i++) {
+              fake2Elements[i].style.display = "none";
+            }
+          }
+        });
+      });
+
+
+      document.querySelectorAll('.dropdown-item-2').forEach(item => {
+        item.addEventListener('click', event => {
+          event.preventDefault();
+          const dropdownButton = document.getElementById('dropdownButton-2');
+          dropdownButton.innerHTML = event.target.innerHTML;
+        });
+      });
+
+
+    };
   </script>
 
   <style>
@@ -271,7 +311,6 @@ body {
         </button>
       </div>
     </div>
-    <!-- Menu Display-->
 
     <!-- Profile Stuff-->
     <div
@@ -486,6 +525,7 @@ body {
               </span>
               <div class="dropdown dropdown-hover">
                 <div
+                  id="dropdownButton-1"
                   tabindex="0"
                   role="button"
                   class="btn m-1 w-48 bg-[#ad0214] text-white hover:bg-red-900 border-none"
@@ -493,13 +533,13 @@ body {
                   Danh sách
                 </div>
                 <ul
-                  tabindex="0"
                   class="dropdown-content z-[1] menu p-2 shadow bg-red-50 rounded-box w-52 text-red-800 font-medium"
                 >
-                  <li><a>Kì</a></li>
-                  <li><a>Sự kiện</a></li>
+                  <li><a href="#" class="dropdown-item-1">Kì</a></li>
+                  <li><a href="#" class="dropdown-item-1">Sự kiện</a></li>
                 </ul>
               </div>
+
             </div>
 
             <div class="flex flex-col col-start-3 col-span-2">
@@ -508,6 +548,7 @@ body {
               </span>
               <div class="dropdown dropdown-hover">
                 <div
+                  id="dropdownButton-2"
                   tabindex="0"
                   role="button"
                   class="btn m-1 w-full bg-[#ad0214] text-white hover:bg-red-900 border-none"
@@ -518,10 +559,15 @@ body {
                   tabindex="0"
                   class="dropdown-content z-[1] menu p-2 shadow bg-red-50 rounded-box w-52 text-red-800 font-medium"
                 >
-                  <li><a>Uniraw 2024</a></li>
-                  <li><a>Algorithm Arena 2024</a></li>
-                  <li><a>Teambuilding 2024</a></li>
-                  <li><a>Geminus 2024</a></li>
+                  <li><a href="#" class="dropdown-item-2 fake-1">Uniraw 2024</a></li>
+                  <li><a href="#" class="dropdown-item-2 fake-1">Algorithm Arena 2024</a></li>
+                  <li><a href="#" class="dropdown-item-2 fake-1">Teambuilding 2024</a></li>
+                  <li><a href="#" class="dropdown-item-2 fake-1">Geminus 2024</a></li>
+
+                  <li><a href="#" class="dropdown-item-2 fake-2">SP24</a></li>
+                  <li><a href="#" class="dropdown-item-2 fake-2">SU24</a></li>
+                  <li><a href="#" class="dropdown-item-2 fake-2">FA24</a></li>
+                  <li><a href="#" class="dropdown-item-2 fake-2">SP25</a></li>
                 </ul>
               </div>
             </div>
@@ -571,11 +617,9 @@ body {
                 </div>
               </div>
 
-              <button
-                class="btn text-white rounded-full border-transparent bg-[#ad0214] hover:border-transparent hover:bg-[#99000f]"
+              <input
+                class="btn text-white rounded-full border-transparent bg-[#ad0214] hover:border-transparent hover:bg-[#99000f]" value="Xác nhận" type="submit"
               >
-                Xác nhận
-              </button>
             </div>
 
             <div class="flex flex-col col-span-4">
