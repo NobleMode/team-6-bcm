@@ -20,7 +20,8 @@ export class AppController {
   @Get('/')
   @Render('login')
   index(@Request() req): { message: string } {
-    return { message: req.flash('loginError') };
+    return { message: "xd" // req.flash('loginError') };
+    };
   }
 
   @UseGuards(LoginGuard)
